@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Здесь</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <meta name="Description" content="LastFM genre visualizor"/>
+        <meta name="keywords" content="Last.FM, Last.FM visualization, Визуализация, Визуализация Ластов, восилей, мутант ъхвлам" />
+        <meta name="author" content="Magic Borscht">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="title" content="BURSCHT" />
+		
+        <script src="scripts/vivagraph.min.js"></script>
+		<script src="scripts/jquery.min.js"></script>
+        <script src="scripts/yasiv.vk.min.js"></script>
+        <script src='scripts/jquery.simplemodal.js'></script>
+        <script src="scripts/jquery-ui-1.8.18.custom.min.js"></script>
+
+        <script type='text/javascript'>
+            /*global Viva*/
+            function onLoad() {
+                var graphGenerator = Viva.Graph.generator();
+                var graph = graphGenerator.grid(10, 10);
+                var layout = Viva.Graph.Layout.forceDirected(graph, {
+                   springLength : 10,
+                   springCoeff : 0.0008,
+                   dragCoeff : 0.02,
+                   gravity : -1.2
+                });
+
+                var graphics = Viva.Graph.View.svgGraphics();
+
+                // Node pinning is an attribute, which tells layout algorithm
+                // to not update node's position. Effectively the node looks
+                // like it is pinned to the canvas.
+
+                // You can pin/unpin node any time you want:
+                graphics.node(function (node) {
+                    var ui = Viva.Graph.svg("rect")
+                         .attr("width", 10)
+                         .attr("height", 10)
+                         .attr("fill", "#00a2e8");
+                    ui.addEventListener('click', function () {
+                        // toggle pinned mode
+                        layout.pinNode(node, !layout.isNodePinned(node));
+                    });
+                    return ui;
+                });
+
+                var renderer = Viva.Graph.View.renderer(graph, {
+                        layout    : layout,
+                        graphics  : graphics,
+                        container : document.getElementById('graphContainer')
+                    });
+
+                renderer.run();
+            }
+        </script>
+        <style type='text/css'>
+            body, svg, #graphContainer {
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                margin: 0;
+            }
+            .label {
+                position: absolute;
+                top: 10px;
+                color: white;
+                font-size: 18px;
+                left: 10px;
+                font-family: Verdana;
+            }
+        </style>
+    </head>
+    <body onload="onLoad()" style="background-color: black;">
+		
+		<div id="formContainer">
+		<form name="toporol" method="get" action="">
+            <input name="genre1" type="text" size="25" maxlength="30" value="Я НЕ ОТДАМ ХЛЕБ"/>
+            <input name="genre2" type="text" size="25" maxlength="30" value="Я КАМЕНЩИК РАБОТАЮ ТРИ ДНЯ"/> <br/>
+			<input type="submit" name="enter" value="Жмяк"/>
+		</form>
+		</div>
+	
+        <div id='graphContainer'></div>
+        <span class='label'>Click and drag node to toggle its pinning attribute.</span>
+    </body>
+</html>
