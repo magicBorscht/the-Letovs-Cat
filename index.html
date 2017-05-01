@@ -2,17 +2,17 @@
 <html>
     <head>
         <title>Здесь опасно для гусей</title>
-		
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
         <meta name="Description" content="LastFM genre visualizor"/>
         <meta name="keywords" content="Last.FM, Last.FM visualization, Визуализация, Визуализация Ластов, восилей, мутант ъхвлам" />
         <meta name="author" content="Magic Borscht">
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta name="title" content="BURSCHT" />
-		
+
         <script src="scripts/vivagraph.min.js"></script>
-	<script src="scripts/jquery.min.js"></script>
+        <script src="scripts/jquery.min.js"></script>
         <script src="scripts/yasiv.vk.min.js"></script>
         <script src='scripts/jquery.simplemodal.js'></script>
         <script src="scripts/jquery-ui-1.8.18.custom.min.js"></script>
@@ -38,9 +38,9 @@
                 // You can pin/unpin node any time you want:
                 graphics.node(function (node) {
                     var ui = Viva.Graph.svg("rect")
-                         .attr("width", 10)
-                         .attr("height", 10)
-                         .attr("fill", "#00a2e8");
+                        .attr("width", 10)
+                        .attr("height", 10)
+                        .attr("fill", "#00a2e8");
                     ui.addEventListener('click', function () {
                         // toggle pinned mode
                         layout.pinNode(node, !layout.isNodePinned(node));
@@ -49,10 +49,10 @@
                 });
 
                 var renderer = Viva.Graph.View.renderer(graph, {
-                        layout    : layout,
-                        graphics  : graphics,
-                        container : document.getElementById('graphContainer')
-                    });
+                    layout    : layout,
+                    graphics  : graphics,
+                    container : document.getElementById('graphContainer')
+                });
 
                 renderer.run();
             }
@@ -75,16 +75,16 @@
         </style>
     </head>
     <body onload="onLoad()" style="background-color: black;">
-		
-		<div id="formContainer">
-		<form name="toporol" method="get" action="">
-            <input name="genre1" type="text" size="25" maxlength="30" value="Я НЕ ОТДАМ ХЛЕБ"/>
-            <input name="genre2" type="text" size="25" maxlength="30" value="Я КАМЕНЩИК РАБОТАЮ ТРИ ДНЯ"/> <br/>
-			<input type="submit" name="enter" value="Жмяк"/>
-		</form>
-		</div>
-	
-        <div id='graphContainer'></div>
-		
+
+    <div id="formContainer">
+    <form name="toporol" method="get" action="">
+        <input name="genre1" type="text" size="25" maxlength="30" value="Я НЕ ОТДАМ ХЛЕБ"/>
+        <input name="genre2" type="text" size="25" maxlength="30" value="Я КАМЕНЩИК РАБОТАЮ ТРИ ДНЯ"/> <br/>
+        <input type="submit" name="enter" value="Жмяк"/>
+    </form>
+    </div>
+
+    <div id='graphContainer'></div>
+
     </body>
 </html>
