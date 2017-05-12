@@ -15,7 +15,9 @@
 		<script src="scripts/jquery.min.js"></script>
         <script src="scripts/yasiv.vk.min.js"></script>
         <script src='scripts/jquery.simplemodal.js'></script>
-        <script src="scripts/jquery-ui-1.8.18.custom.min.js"></script>
+        <script src='scripts/jquery-ui-1.8.18.custom.min.js'></script>
+
+        <script src='secure.js'></script>
 
         <script type='text/javascript'>
             /*global Viva*/
@@ -61,6 +63,13 @@
                 let actor = document.getElementById('actorBox').value;
                 let tags = document.getElementById('tagsBox').value;
                 alert("to be implemented!" + actor + tags);
+
+//testing our secrets:
+                alert("appname: "+$secure_appName +"\n" +
+                    "apiKey: "+$secure_apiKey +"\n" +
+                    "sharedSecret: "+$secure_sharedSecret +"\n" +
+                    "registeredTo: "+$secure_registeredTo +"\n");
+
             }
 
         </script>
