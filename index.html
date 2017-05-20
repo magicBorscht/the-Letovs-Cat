@@ -61,14 +61,14 @@
                 renderer.run();
             }
 
-            function onActorSubmit(){
+            function onArtistSubmit(){
 		let req = new XMLHttpRequest();
     		req.open("GET", RequestURL, false);
     		req.send();
    		requestsResultsSum = requestsResultsSum + req.responseText;
-                let actor = document.getElementById('actorBox').value;
+                let artist = document.getElementById('artistBox').value;
                 let tags = document.getElementById('tagsBox').value;
-                alert("to be implemented!" + actor + tags);
+                alert("to be implemented!" + artist + tags);
 
 //testing our secrets:
                 alert("appname: "+$secure_appName +"\n" +
@@ -100,12 +100,12 @@
 		
 		<div id="formContainer">
 		<form name="toporol" method="get" action="">
-            <input id="actorBox"
+            <input id="artistBox"
                    type="text" size="25" maxlength="30" value="ШАБОЖ"/>
             <input id="tagsBox"
                    type="text" size="25" maxlength="30" value=" ЪТОТАРЫ"/> <br/>
-			<input id="actorSubmitButton"
-                   type="button" name="enter" value="Жмяк" onclick="onActorSubmit()"/>
+			<input id="artistSubmitButton"
+                   type="button" name="enter" value="Жмяк" onclick="onArtistSubmit()"/>
 		</form>
 		</div>
 	
