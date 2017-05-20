@@ -97,16 +97,18 @@
                 }).done(function( data ) {
                     alert( data.getElementsByTagName("name")[0].childNodes[0].nodeValue );
                 });
+		okeanos(data);
 
             }
 
-	function okeanos(){
+	function okeanos(data){
 		var n=data.getElementsByTagName("artist").length;
 		n--;
 		var i=0;
+		var fhtagn;
 		for (i=0; i<n; i++)
 			{
-			 var fhtagn += data.getElementsByTagName("name")[i].childNodes[i].nodeValue;
+			 fhtagn += data.getElementsByTagName("name")[i].childNodes[i].nodeValue;
 			 }
 		}
         </script>
