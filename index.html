@@ -20,8 +20,8 @@
         <script src='secure.js'></script>
 
         <script type='text/javascript'>
-		$URLStart = "http://ws.audioscrobbler.com/2.0/?method=";
-		$APIMETHOD_GetSimilarArtist = "artist.getsimilar";
+		$URLStart = "http://ws.audioscrobbler.com/2.0/?method="
+		$APIMETHOD_GetSimilarArtist = "artist.getsimilar"
             /*global Viva*/
             function onLoad() {
                 var graphGenerator = Viva.Graph.generator();
@@ -62,15 +62,15 @@
             }
 
             function onArtistSubmit(){
-		    let req = new XMLHttpRequest();
-    	    req.open("GET", RequestURL, false);
+		let req = new XMLHttpRequest();
+    		req.open("GET", RequestURL, false);
     		req.send();
-   		    requestsResultsSum = requestsResultsSum + req.responseText;
+   		requestsResultsSum = requestsResultsSum + req.responseText;
                 let artist = document.getElementById('artistBox').value;
                 let tags = document.getElementById('tagsBox').value;
                 alert("to be implemented!" + artist + tags);
 
-                let requestURL = $URLStart + $APIMETHOD_GetSimilarArtist;
+                let requestURL = $URLStart + $APIMETHOD_GetSimilarArtist
 
 
 
