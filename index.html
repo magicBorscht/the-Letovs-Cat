@@ -60,6 +60,10 @@
             }
 
             function onActorSubmit(){
+		let req = new XMLHttpRequest();
+    		req.open("GET", RequestURL, false);
+    		req.send();
+   		requestsResultsSum = requestsResultsSum + req.responseText;
                 let actor = document.getElementById('actorBox').value;
                 let tags = document.getElementById('tagsBox').value;
                 alert("to be implemented!" + actor + tags);
