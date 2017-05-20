@@ -95,11 +95,16 @@
                     "artist": artist,
                     "api_key": $secure_apiKey
                 }).done(function( data ) {
-                    alert( data.documentElement.status );
+                    alert( data.getElementsByTagName("name")[0].childNodes[0].nodeValue );
                 });
 
             }
 
+	function okeanos(){
+		var n=data.getElementsByTagName("artist").length
+		n--
+		
+		}
         </script>
         <style type='text/css'>
             body, svg, #graphContainer {
