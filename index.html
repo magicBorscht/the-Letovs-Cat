@@ -103,7 +103,11 @@
 	function okeanos(){
 		var n=data.getElementsByTagName("artist").length
 		n--
-		
+		var i=0
+		for (i=0; i<n; i++)
+			{
+			 var fhtagn += data.getElementsByTagName("name")[i].childNodes[i].nodeValue
+			 }
 		}
         </script>
         <style type='text/css'>
