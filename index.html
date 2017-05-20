@@ -70,11 +70,34 @@
                 let tags = document.getElementById('tagsBox').value;
                 alert("to be implemented!" + artist + tags);
 
+                let requestURL = $URLStart + $APIMETHOD_GetSimilarArtist
+
+
+
+                let req = new XMLHttpRequest();
+                req.open("GET", RequestURL, false);
+                req.send();
+                requestsResultsSum = requestsResultsSum + req.responseText;
+
 //testing our secrets:
                 alert("appname: "+$secure_appName +"\n" +
                     "apiKey: "+$secure_apiKey +"\n" +
                     "sharedSecret: "+$secure_sharedSecret +"\n" +
                     "registeredTo: "+$secure_registeredTo +"\n");
+
+            }
+
+            function tezdit(){
+                let artist = document.getElementById('artistBox').value;
+
+
+                $.get( $URLStart, {
+                    "method": $APIMETHOD_GetSimilarArtist,
+                    "artist": artist,
+                    "api_key": $secure_apiKey
+                }).done(function( data ) {
+                    alert( data.documentElement.status );
+                });
 
             }
 
@@ -108,7 +131,8 @@
                    type="button" name="enter" value="Жмяк" onclick="onArtistSubmit()"/>
 		</form>
 		</div>
-	
+	    <button onclick="tezdit()"> jmak me bleat </button>
+
         <div id='graphContainer'></div>
     </body>
 </html>
