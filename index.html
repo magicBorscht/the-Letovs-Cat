@@ -25,6 +25,8 @@
             $APIMETHOD_GetSimilarArtist = "artist.getsimilar";
             $ArtistsOnGraph = [];
 
+            var $graph;
+
             function onArtistSubmit(){
                 let artist = document.getElementById('artistBox').value;
                 let tags = document.getElementById('tagsBox').value;
@@ -66,7 +68,7 @@
                 var j, k;
                 var bor, oda;
                 var simart = [];
-                var graph = Viva.Graph.graph();
+                $graph = Viva.Graph.graph();
                 var names = [];
                 var pics = [];
                 for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
@@ -78,7 +80,8 @@
                 for (i=0; i<krabr.getElementsByTagName("artist").length; i++) {
                     if ($ArtistsOnGraph.indexOf(names[i]) === -1) {
                         $ArtistsOnGraph.push(names[i]);
-                        graph.addNode(names[i], pics[i]);
+                        $graph.addNode(names[i], pics[i]);
+                        $graph.addLink(names[i], )
                     }
 
                 }
@@ -101,7 +104,7 @@
                         });
                 }
 
-               // graph.addLink('anvaka', 'indexzero');
+               // $graph.addLink('anvaka', 'indexzero');
 
                 var graphics = Viva.Graph.View.svgGraphics();
 
@@ -116,7 +119,7 @@
                     nodeUI.attr('x', pos.x - 12).attr('y', pos.y - 12);
                 });
 
-                var renderer = Viva.Graph.View.renderer(graph, {
+                var renderer = Viva.Graph.View.renderer($graph, {
                     graphics : graphics
                 });
                 renderer.run();
