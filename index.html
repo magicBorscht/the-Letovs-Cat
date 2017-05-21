@@ -132,7 +132,10 @@
             for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
             {
                 names.push(krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue);
-                pics.push(krabr.getElementsByTagName("image")[(i*5)+2].childNodes[0].nodeValue);
+                if(krabr.getElementsByTagName("image")[(i*4)+2].childNodes[0].nodeValue !== "")
+                    pics.push(krabr.getElementsByTagName("image")[(i*4)+2].childNodes[0].nodeValue);
+                else
+                    pics.push("");
             }
 
             for (i=0; i<$SimilarArtistsToAccept; i++) {
