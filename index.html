@@ -37,11 +37,18 @@
                         }
                     });
                 };
+            var $layout = Viva.Graph.Layout.forceDirected($graph, {
+                springLength: 350,
+                springCoeff: 0.00008,
+                dragCoeff: 0.02,
+                gravity: -0.4
+            });
 
             var $SimilarArtistsToAccept = 20;
 
             var $renderer = Viva.Graph.View.renderer($graph, {
-                graphics : $graphics
+                graphics : $graphics,
+                layout : $layout
             });
 
             function onLoad(){
