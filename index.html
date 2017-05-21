@@ -60,10 +60,11 @@
 
             function tests(){
 //testing our secrets:
-                alert("appname: "+$secure_appName +"\n" +
+/*                alert("appname: "+$secure_appName +"\n" +
                     "apiKey: "+$secure_apiKey +"\n" +
                     "sharedSecret: "+$secure_sharedSecret +"\n" +
-                    "registeredTo: "+$secure_registeredTo +"\n");
+                    "registeredTo: "+$secure_registeredTo +"\n");*/
+                    $graph.clear();
             }
 
 
@@ -296,7 +297,7 @@
                    type="button" name="enter" value="Search by tag" onclick="onTagSubmit()"/>
 		</form>
 		</div>
-	    <button onclick="tests()"> don't jmak me bleat </button>
+	    <button onclick="tests()"> Очистить граф </button>
 
         <div id='graphContainer'></div>
     </body>
