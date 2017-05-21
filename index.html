@@ -29,14 +29,10 @@
             //var $graphics = Viva.Graph.View.svgGraphics();
             var $graphics = Viva.Graph.View.svgGraphics(),
                 nodeSize = 24,
-                // we use this method to highlight all realted links
-                // when user hovers mouse over a node:
                 highlightRelatedNodes = function(nodeId, isOn) {
-                    // just enumerate all realted nodes and update link color:
                     $graph.forEachLinkedNode(nodeId, function(node, link){
                         var linkUI = $graphics.getLinkUI(link.id);
                         if (linkUI) {
-                            // linkUI is a UI object created by graphics below
                             linkUI.attr('stroke', isOn ? 'red' : 'gray');
                         }
                     });
@@ -125,16 +121,11 @@
                         });
                 }
 
-               // $graph.addLink('anvaka', 'indexzero');
-
-
-
-
-
-
                 $graphics.node(function(node) {
-                    var url = node.data;
-                    var ui = Viva.Graph.svg('image')
+                    var url = node.data,
+                        svgText = Viva.Graph.svg('text').attr('y', '-4px').text(node.id),
+                        ui = Viva.Graph.svg('g'),
+                        img = Viva.Graph.svg('image')
                         .attr('width', 24)
                         .attr('height', 24)
                         .link(url);
@@ -143,13 +134,18 @@
                     }, function() { // mouse out
                         highlightRelatedNodes(node.id, false);
                     });
+                    ui.append(svgText);
+                    ui.append(img);
                     return ui;
                 }).placeNode(function(nodeUI, pos) {
-                    nodeUI.attr('x', pos.x - nodeSize / 2).attr('y', pos.y - nodeSize / 2);
+                    nodeUI.attr('transform',
+                        'translate(' +
+                        (pos.x - nodeSize/2) + ',' + (pos.y - nodeSize/2) +
+                        ')');
                 });
-                $graphics.placeNode(function(nodeUI, pos) {
-                    nodeUI.attr('x', pos.x - 12).attr('y', pos.y - 12);
-                });
+              //  $graphics.placeNode(function(nodeUI, pos) {
+              //      nodeUI.attr('x', pos.x - 12).attr('y', pos.y - 12);
+             //   });
 
                 $renderer.run();
             }
