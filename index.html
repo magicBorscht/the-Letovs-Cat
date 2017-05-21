@@ -105,12 +105,12 @@
 	function okeanos(krabr){
         var i;
         var graph = Viva.Graph.graph();
-        var names[krabr.getElementsByTagName("artist").length];
-        var pics[krabr.getElementsByTagName("artist").length];
+        var names = [];
+        var pics = [];
         for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
         {
-            names[i] = krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue
-            pics[i] = krabr.getElementsByTagName("image")[i].childNodes[0].nodeValue;
+            names.push(krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue);
+            pics.push(krabr.getElementsByTagName("image")[i].childNodes[0].nodeValue);
         }
         for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
         {
@@ -157,12 +157,12 @@
         </style>
     </head>
 
-    <body onload="onLoad()" style="background-color: black;">
+    <body onload="onLoad()" style="background-color: ghostwhite;">
 		
 		<div id="formContainer">
 		<form name="toporol" method="get" action="">
             <input id="artistBox"
-                   type="text" size="25" maxlength="30" value="ШАБОЖ"/>
+                   type="text" size="25" maxlength="30" value="Лолита"/>
             <input id="tagsBox"
                    type="text" size="25" maxlength="30" value=" ЪТОТАРЫ"/> <br/>
 			<input id="artistSubmitButton"
