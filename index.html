@@ -28,7 +28,7 @@
             var $graph = Viva.Graph.graph();
             //var $graphics = Viva.Graph.View.svgGraphics();
             var $graphics = Viva.Graph.View.svgGraphics(),
-                nodeSize = 24,
+                nodeSize = 10,
                 // we use this method to highlight all realted links
                 // when user hovers mouse over a node:
                 highlightRelatedNodes = function(nodeId, isOn) {
@@ -63,7 +63,7 @@
 
             function addArtistNodeToGraph(artistName, artistPic)
             {
-                if (!$ArtistsOnGraph.contains(artistName))
+                if ($ArtistsOnGraph.indexOf(artistName) === -1)
                 {
                     $graph.addNode(artistName, artistPic);
                     $ArtistsOnGraph.push(artistName);
