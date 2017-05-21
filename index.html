@@ -26,6 +26,13 @@
             $ArtistsOnGraph = [];
 
             var $graph = Viva.Graph.graph();
+            var $graphics = Viva.Graph.View.svgGraphics();
+
+
+
+            var $renderer = Viva.Graph.View.renderer($graph, {
+                graphics : $graphics
+            });
 
             function onArtistSubmit(){
                 let artist = document.getElementById('artistBox').value;
@@ -114,24 +121,18 @@
                 }
 
                // $graph.addLink('anvaka', 'indexzero');
-
-                var graphics = Viva.Graph.View.svgGraphics();
-
-                graphics.node(function(node) {
+                $graphics.node(function(node) {
                     var url = node.data;
                     return Viva.Graph.svg('image')
                         .attr('width', 24)
                         .attr('height', 24)
                         .link(url);
                 });
-                graphics.placeNode(function(nodeUI, pos) {
+                $graphics.placeNode(function(nodeUI, pos) {
                     nodeUI.attr('x', pos.x - 12).attr('y', pos.y - 12);
                 });
 
-                var renderer = Viva.Graph.View.renderer($graph, {
-                    graphics : graphics
-                });
-                renderer.run();
+                $renderer.run();
             }
         </script>
 
