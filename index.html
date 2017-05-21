@@ -96,22 +96,27 @@
                     "artist": artist,
                     "api_key": $secure_apiKey
                 }).done(function (data) {
-                    alert(data.getElementsByTagName("image")[0].childNodes[0].nodeValue);
-                    var kettler = data;
-                   okeanos(kettler);
+                    //alert(data.getElementsByTagName("image")[0].childNodes[0].nodeValue);
+                    //var kettler = data;
+                   okeanos(data);
                 });
                 //okeanos();
             }
 
 	function okeanos(){
-       var i;
-       var krabr = arguments[0];
+        var i=0;
+        var krabr = arguments[0];
         var graph = Viva.Graph.graph();
-        //graph.addNode('anvaka', konus.getElementsByTagName("image")[0].childNodes[0].nodeValue);
-       // graph.addNode('indexzero', 'd43e8ea63b61e7669ded5b9d3c2e980f');
+        var names[krabr.getElementsByTagName("artist").length];
+        var pics[krabr.getElementsByTagName("artist").length];
         for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
         {
-            graph.addNode(krabr.getElementsByTagName("name")[0].childNodes[0].nodeValue, krabr.getElementsByTagName("image")[0].childNodes[0].nodeValue);
+            names[i] = krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue
+            pics[i] = krabr.getElementsByTagName("image")[i].childNodes[0].nodeValue;
+        }
+        for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
+        {
+            graph.addNode(names[i], pics[i]);
         }
 
        // graph.addLink('anvaka', 'indexzero');
