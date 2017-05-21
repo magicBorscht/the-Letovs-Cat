@@ -126,12 +126,11 @@
             for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
             {
                 names.push(krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue);
-                pics.push(krabr.getElementsByTagName("image")[i].childNodes[0].nodeValue);
+                pics.push(krabr.getElementsByTagName("image")[(i*6)+2].childNodes[0].nodeValue);
             }
 
             for (i=0; i<$SimilarArtistsToAccept; i++) {
                 addArtistNodeToGraph(names[i], pics[i]);
-                $graph.addLink(names[i])
             }
             for (i=0; i<$SimilarArtistsToAccept; i++)
             {
