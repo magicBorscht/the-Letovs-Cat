@@ -74,7 +74,7 @@
                     names.push(krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue);
                     pics.push(krabr.getElementsByTagName("image")[(i*6)+3].childNodes[0].nodeValue);
                 }
-                $ArtistsOnGraph=names;
+
                 for (i=0; i<krabr.getElementsByTagName("artist").length; i++) {
                     if ($ArtistsOnGraph.indexOf(names[i]) === -1) {
                         $ArtistsOnGraph.push(names[i]);
