@@ -133,16 +133,16 @@
             for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
             {
                 names.push(krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue);
-                if(krabr.getElementsByTagName("image")[(i*4)+2].childNodes[0].nodeValue !== "")
-                    pics.push(krabr.getElementsByTagName("image")[(i*4)+2].childNodes[0].nodeValue);
+                if(typeof krabr.getElementsByTagName("image")[(i*5)+2].childNodes[0] !== "undefined")
+                    pics.push(krabr.getElementsByTagName("image")[(i*5)+2].childNodes[0].nodeValue);
                 else
                     pics.push("");
             }
 
-            for (i=0; i<$SimilarArtistsToAccept; i++) {
+            for (i=0; i<$SimilarArtistsToAccept && i<names.length; i++) {
                 addArtistNodeToGraph(names[i], pics[i]);
             }
-            for (i=0; i<$SimilarArtistsToAccept; i++)
+            for (i=0; i<$SimilarArtistsToAccept && i<names.length; i++)
             {
                 let curartist = krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue;
                 $.get($URLStart, {
@@ -152,7 +152,7 @@
                 }).done(function (data) {
                     for (j=0; j<$ArtistsOnGraph.length; j++)
                     {
-                        for (k=0; k<$SimilarArtistsToAccept; k++)
+                        for (k=0; k<$SimilarArtistsToAccept && k<names.length; k++)
                         {
                             if ($ArtistsOnGraph[j] === data.getElementsByTagName("name")[k].childNodes[0].nodeValue) $graph.addLink($ArtistsOnGraph[j], curartist);
                         }
@@ -201,15 +201,18 @@
                 for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
                 {
                     names.push(krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue);
-                    pics.push(krabr.getElementsByTagName("image")[(i*6)+2].childNodes[0].nodeValue);
+                    if(typeof krabr.getElementsByTagName("image")[(i*6)+2].childNodes[0] !== "undefined")
+                        pics.push(krabr.getElementsByTagName("image")[(i*6)+2].childNodes[0].nodeValue);
+                    else
+                        pics.push("");
                 }
 
                 addArtistNodeToGraph(rootArtist, rootArtistPic);
-                for (i=0; i<$SimilarArtistsToAccept; i++) {
+                for (i=0; i<$SimilarArtistsToAccept && i<names.length; i++) {
                     addArtistNodeToGraph(names[i], pics[i]);
                     $graph.addLink(names[i], rootArtist)
                 }
-                for (i=0; i<$SimilarArtistsToAccept; i++)
+                for (i=0; i<$SimilarArtistsToAccept && i<names.length; i++)
                 {
                     let curartist = krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue;
                     $.get($URLStart, {
@@ -219,7 +222,7 @@
                     }).done(function (data) {
                         for (j=0; j<$ArtistsOnGraph.length; j++)
                         {
-                            for (k=0; k<$SimilarArtistsToAccept; k++)
+                            for (k=0; k<$SimilarArtistsToAccept && k<names.length; k++)
                             {
                                 if ($ArtistsOnGraph[j] === data.getElementsByTagName("name")[k].childNodes[0].nodeValue) $graph.addLink($ArtistsOnGraph[j], curartist);
                             }
@@ -285,7 +288,7 @@
                    type="text" size="25" maxlength="30" value="Лолита"/>
             <label> Tag: </label>
             <input id="tagsBox"
-                   type="text" size="25" maxlength="30" value=" ЪТОТАРЫ"/>
+                   type="text" size="25" maxlength="30" value=" doom"/>
             <label> Number of artists to get: </label>
             <input id="numberToGetBox"
                    type="text" size="25" maxlength="30" value=""/>
