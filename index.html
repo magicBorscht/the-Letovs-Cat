@@ -49,13 +49,13 @@
 
             }
 
-            function addArtist(artistName, artistPic)
+            function addArtistNodeToGraph(artistName, artistPic)
             {
                 if (!$ArtistsOnGraph.contains(artistName))
                 {
                     $graph.addNode(artistName, artistPic);
+                    $ArtistsOnGraph.push(artistName);
                 }
-                $ArtistsOnGraph.push(artistName);
             }
 
             function tezdit() {
