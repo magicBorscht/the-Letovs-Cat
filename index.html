@@ -23,13 +23,14 @@
 
             $URLStart = "http://ws.audioscrobbler.com/2.0/?method=";
             $APIMETHOD_GetSimilarArtist = "artist.getsimilar";
-
+            var konus;
 
             /*global Viva*/
             function onLoad() {
-                var graphGenerator = Viva.Graph.generator();
+                //var graphGenerator = Viva.Graph.generator();
               //  var graph = graphGenerator.grid(10, 10);
                 var graph = Viva.Graph.graph();
+
                 var layout = Viva.Graph.Layout.forceDirected(graph, {
                    springLength : 10,
                    springCoeff : 0.0008,
@@ -95,37 +96,43 @@
                     "artist": artist,
                     "api_key": $secure_apiKey
                 }).done(function (data) {
-                    alert(data.getElementsByTagName("name")[0].childNodes[0].nodeValue);
-                    okeanos(data);
+                    alert(data.getElementsByTagName("image")[0].childNodes[0].nodeValue);
+                    var kettler = data;
+                   okeanos(kettler);
                 });
-                //okeanos(data);
+                //okeanos();
             }
 
 	function okeanos(){
        var i;
-        var graphGenerator = Viva.Graph.generator();
-        //  var graph = graphGenerator.grid(10, 10);
+       var krabr = arguments;
         var graph = Viva.Graph.graph();
-        var layout = Viva.Graph.Layout.forceDirected(graph, {
-            springLength: 10,
-            springCoeff: 0.0008,
-            dragCoeff: 0.02,
-            gravity: -1.2
-            });
-        for (i=0; i<data.getElementsByTagName("artist").length; i++)
+        //graph.addNode('anvaka', konus.getElementsByTagName("image")[0].childNodes[0].nodeValue);
+       // graph.addNode('indexzero', 'd43e8ea63b61e7669ded5b9d3c2e980f');
+        for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
         {
-            graph.addNode(data.getElementsByTagName("name")[0].childNodes[0].nodeValue, data.getElementsByTagName("image")[0].childNodes[0].nodeValue);
+            graph.addNode(krabr.getElementsByTagName("name")[0].childNodes[0].nodeValue, krabr.getElementsByTagName("image")[0].childNodes[0].nodeValue);
         }
 
-        var n;
-        n = arguments.getElementsByTagName("artist").length;
-		var i=0;
-		var fhtagn;
-		for (i=0; i<n; i++)
-			{
-			 fhtagn += data.getElementsByTagName("name")[i].childNodes[i].nodeValue;
-			 }
-        alert(fhtagn);
+       // graph.addLink('anvaka', 'indexzero');
+
+        var graphics = Viva.Graph.View.svgGraphics();
+
+        graphics.node(function(node) {
+            var url = node.data;
+            return Viva.Graph.svg('image')
+                .attr('width', 24)
+                .attr('height', 24)
+                .link(url);
+        });
+        graphics.placeNode(function(nodeUI, pos) {
+            nodeUI.attr('x', pos.x - 12).attr('y', pos.y - 12);
+        });
+
+        var renderer = Viva.Graph.View.renderer(graph, {
+            graphics : graphics
+        });
+        renderer.run();
 		}
         </script>
 
