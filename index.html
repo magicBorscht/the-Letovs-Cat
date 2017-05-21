@@ -110,11 +110,76 @@
                     "tag": tag,
                     "api_key": $secure_apiKey
                 }).done(function (data) {
-                    okeanos(data, tag);
+                    regulus(data);
                     //alert(data.getElementsByTagName("image")[0].childNodes[0].nodeValue);
                 });
                 //okeanos();
             }
+
+        function regulus(krabr) {
+            var i;
+            var j, k;
+            var bor, oda;
+            var simart = [];
+            var names = [];
+            var pics = [];
+            for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
+            {
+                names.push(krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue);
+                pics.push(krabr.getElementsByTagName("image")[i].childNodes[0].nodeValue);
+            }
+
+            for (i=0; i<$SimilarArtistsToAccept; i++) {
+                addArtistNodeToGraph(names[i], pics[i]);
+                $graph.addLink(names[i])
+            }
+            for (i=0; i<$SimilarArtistsToAccept; i++)
+            {
+                let curartist = krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue;
+                $.get($URLStart, {
+                    "method": $APIMETHOD_GetSimilarArtist,
+                    "artist": curartist,
+                    "api_key": $secure_apiKey
+                }).done(function (data) {
+                    for (j=0; j<$ArtistsOnGraph.length; j++)
+                    {
+                        for (k=0; k<$SimilarArtistsToAccept; k++)
+                        {
+                            if ($ArtistsOnGraph[j] === data.getElementsByTagName("name")[k].childNodes[0].nodeValue) $graph.addLink($ArtistsOnGraph[j], curartist);
+                        }
+                    }
+                    simart.push(data);
+                });
+            }
+
+            $graphics.node(function(node) {
+                var url = node.data,
+                    svgText = Viva.Graph.svg('text').attr('y', '-4px').text(node.id),
+                    ui = Viva.Graph.svg('g'),
+                    img = Viva.Graph.svg('image')
+                        .attr('width', 24)
+                        .attr('height', 24)
+                        .link(url);
+                $(ui).hover(function() { // mouse over
+                    highlightRelatedNodes(node.id, true);
+                }, function() { // mouse out
+                    highlightRelatedNodes(node.id, false);
+                });
+                ui.append(svgText);
+                ui.append(img);
+                return ui;
+            }).placeNode(function(nodeUI, pos) {
+                nodeUI.attr('transform',
+                    'translate(' +
+                    (pos.x - nodeSize/2) + ',' + (pos.y - nodeSize/2) +
+                    ')');
+            });
+            //  $graphics.placeNode(function(nodeUI, pos) {
+            //      nodeUI.attr('x', pos.x - 12).attr('y', pos.y - 12);
+            //   });
+
+            $renderer.run();
+        }
 
 
             function okeanos(krabr, rootArtist, rootArtistPic){
