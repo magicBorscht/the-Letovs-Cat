@@ -96,7 +96,7 @@
                     "artist": artistName,
                     "api_key": $secure_apiKey
                 }).done(function (data) {
-                    let rootartistpic = "";
+                    let rootartistpic = "https://twistedsifter.files.wordpress.com/2016/11/things-i-have-drawn-dom-instagram-13.jpg?w=800&h=649";
                     if(typeof data.getElementsByTagName("image")[2].childNodes[0] !== "undefined")
                         rootartistpic = data.getElementsByTagName("image")[2].childNodes[0].nodeValue;
                     okeanos(similarsXML, artistName, rootartistpic);
@@ -138,7 +138,7 @@
                 if(typeof krabr.getElementsByTagName("image")[(i*5)+2].childNodes[0] !== "undefined")
                     pics.push(krabr.getElementsByTagName("image")[(i*5)+2].childNodes[0].nodeValue);
                 else
-                    pics.push("1");
+                    pics.push("https://twistedsifter.files.wordpress.com/2016/11/things-i-have-drawn-dom-instagram-13.jpg?w=800&h=649");
             }
 
             for (i=0; i<$SimilarArtistsToAccept && i<names.length; i++) {
@@ -206,7 +206,7 @@
                     if(typeof krabr.getElementsByTagName("image")[(i*6)+2].childNodes[0] !== "undefined")
                         pics.push(krabr.getElementsByTagName("image")[(i*6)+2].childNodes[0].nodeValue);
                     else
-                        pics.push("");
+                        pics.push("https://twistedsifter.files.wordpress.com/2016/11/things-i-have-drawn-dom-instagram-13.jpg?w=800&h=649");
                 }
 
                 addArtistNodeToGraph(rootArtist, rootArtistPic);
