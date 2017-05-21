@@ -28,7 +28,8 @@
             /*global Viva*/
             function onLoad() {
                 var graphGenerator = Viva.Graph.generator();
-                var graph = graphGenerator.grid(10, 10);
+              //  var graph = graphGenerator.grid(10, 10);
+                var graph = Viva.Graph.graph();
                 var layout = Viva.Graph.Layout.forceDirected(graph, {
                    springLength : 10,
                    springCoeff : 0.0008,
@@ -87,6 +88,7 @@
             }
 
             function tezdit(){
+                var i;
                 let artist = document.getElementById('artistBox').value;
 
 
@@ -97,21 +99,27 @@
                 }).done(function( data ) {
                     alert( data.getElementsByTagName("name")[0].childNodes[0].nodeValue );
                 });
-		okeanos(data);
+                for (i=0; i<data.getElementsByTagName("artist").length; i++)
+                    {
+                        graph.addNode(data.getElementsByTagName("name")[0].childNodes[0].nodeValue, data.getElementsByTagName("image")[0].childNodes[0].nodeValue)
+                    }
+		//okeanos(data);
 
             }
 
-	function okeanos(data){
-		var n=data.getElementsByTagName("artist").length;
-		n--;
+	/*function okeanos(){
+        var n;
+        n = arguments.getElementsByTagName("artist").length;
 		var i=0;
 		var fhtagn;
 		for (i=0; i<n; i++)
 			{
 			 fhtagn += data.getElementsByTagName("name")[i].childNodes[i].nodeValue;
 			 }
-		}
+        alert(fhtagn);
+		}*/
         </script>
+
         <style type='text/css'>
             body, svg, #graphContainer {
                 height: 100%;
@@ -129,6 +137,7 @@
             }
         </style>
     </head>
+
     <body onload="onLoad()" style="background-color: black;">
 		
 		<div id="formContainer">
