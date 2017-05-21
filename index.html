@@ -87,7 +87,7 @@
                     pics.push(krabr.getElementsByTagName("image")[(i*6)+2].childNodes[0].nodeValue);
                 }
 
-                for (i=0; i<krabr.getElementsByTagName("artist").length; i++) {
+                for (i=0; i<krabr.getElementsByTagName("artist").length - 90; i++) {
                     if ($ArtistsOnGraph.indexOf(names[i]) === -1) {
                         $ArtistsOnGraph.push(names[i]);
                         $graph.addNode(names[i], pics[i]);
@@ -95,7 +95,7 @@
                     }
 
                 }
-                for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
+                for (i=0; i<krabr.getElementsByTagName("artist").length - 90; i++)
                 {
                     let curartist = krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue;
                     $.get($URLStart, {
@@ -105,7 +105,7 @@
                     }).done(function (data) {
                         for (j=0; j<$ArtistsOnGraph.length; j++)
                         {
-                            for (k=0; k<data.getElementsByTagName("artist").length; k++)
+                            for (k=0; k<data.getElementsByTagName("artist").length - 90; k++)
                             {
                                 if ($ArtistsOnGraph[j] === data.getElementsByTagName("name")[k].childNodes[0].nodeValue) $graph.addLink($ArtistsOnGraph[j], curartist);
                             }
