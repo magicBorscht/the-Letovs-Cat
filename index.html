@@ -96,7 +96,9 @@
                     "artist": artistName,
                     "api_key": $secure_apiKey
                 }).done(function (data) {
-                    let rootartistpic = data.getElementsByTagName("image")[2].childNodes[0].nodeValue;
+                    let rootartistpic = "";
+                    if(typeof data.getElementsByTagName("image")[2].childNodes[0] !== "undefined")
+                        rootartistpic = data.getElementsByTagName("image")[2].childNodes[0].nodeValue;
                     okeanos(similarsXML, artistName, rootartistpic);
                 });
             }
