@@ -61,66 +61,66 @@
                 //okeanos();
             }
 
-	function okeanos(krabr){
-        var i;
-        var j, k;
-        var bor, oda;
-        var simart = [];
-        var graph = Viva.Graph.graph();
-        var names = [];
-        var pics = [];
-        for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
-        {
-            names.push(krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue);
-            pics.push(krabr.getElementsByTagName("image")[(i*6)+3].childNodes[0].nodeValue);
-        }
-        $ArtistsOnGraph=names;
-        for (i=0; i<krabr.getElementsByTagName("artist").length; i++) {
-            if ($ArtistsOnGraph.indexOf(names[i]) === -1) {
-                $ArtistsOnGraph.push(names[i]);
-                graph.addNode(names[i], pics[i]);
-            }
-
-        }
-        for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
-        {
-            let artist = krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue;
-            $.get($URLStart, {
-                "method": $APIMETHOD_GetSimilarArtist,
-                "artist": artist,
-                "api_key": $secure_apiKey
-            }).done(function (data) {
-                for (j=0; j<names.length; j++)
+            function okeanos(krabr){
+                var i;
+                var j, k;
+                var bor, oda;
+                var simart = [];
+                var graph = Viva.Graph.graph();
+                var names = [];
+                var pics = [];
+                for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
                 {
-                    for (k=0; k<data.getElementsByTagName("artist").length; k++)
-                    {
-                        if (names[j] === data.getElementsByTagName("name")[k].childNodes[0].nodeValue) graph.addLink(names[j], krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue);
-                    }
+                    names.push(krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue);
+                    pics.push(krabr.getElementsByTagName("image")[(i*6)+3].childNodes[0].nodeValue);
                 }
-                simart.push(data);
+                $ArtistsOnGraph=names;
+                for (i=0; i<krabr.getElementsByTagName("artist").length; i++) {
+                    if ($ArtistsOnGraph.indexOf(names[i]) === -1) {
+                        $ArtistsOnGraph.push(names[i]);
+                        graph.addNode(names[i], pics[i]);
+                    }
+
+                }
+                for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
+                {
+                    let artist = krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue;
+                    $.get($URLStart, {
+                        "method": $APIMETHOD_GetSimilarArtist,
+                        "artist": artist,
+                        "api_key": $secure_apiKey
+                    }).done(function (data) {
+                        for (j=0; j<names.length; j++)
+                        {
+                            for (k=0; k<data.getElementsByTagName("artist").length; k++)
+                            {
+                                if (names[j] === data.getElementsByTagName("name")[k].childNodes[0].nodeValue) graph.addLink(names[j], krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue);
+                            }
+                        }
+                        simart.push(data);
+                        });
+                }
+
+               // graph.addLink('anvaka', 'indexzero');
+
+                var graphics = Viva.Graph.View.svgGraphics();
+
+                graphics.node(function(node) {
+                    var url = node.data;
+                    return Viva.Graph.svg('image')
+                        .attr('width', 24)
+                        .attr('height', 24)
+                        .link(url);
                 });
-        }
+                graphics.placeNode(function(nodeUI, pos) {
+                    nodeUI.attr('x', pos.x - 12).attr('y', pos.y - 12);
+                });
 
-       // graph.addLink('anvaka', 'indexzero');
-
-        var graphics = Viva.Graph.View.svgGraphics();
-
-        graphics.node(function(node) {
-            var url = node.data;
-            return Viva.Graph.svg('image')
-                .attr('width', 24)
-                .attr('height', 24)
-                .link(url);
-        });
-        graphics.placeNode(function(nodeUI, pos) {
-            nodeUI.attr('x', pos.x - 12).attr('y', pos.y - 12);
-        });
-
-        var renderer = Viva.Graph.View.renderer(graph, {
-            graphics : graphics
-        });
-        renderer.run();
-		}
+                var renderer = Viva.Graph.View.renderer(graph, {
+                    graphics : graphics
+                });
+                renderer.run();
+            }
         </script>
 
         <style type='text/css'>
