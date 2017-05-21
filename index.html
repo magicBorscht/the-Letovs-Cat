@@ -62,13 +62,13 @@
                     "artist": artist,
                     "api_key": $secure_apiKey
                 }).done(function (data) {
-                    okeanos(data);
+                    okeanos(data, artist);
                     //alert(data.getElementsByTagName("image")[0].childNodes[0].nodeValue);
                 });
                 //okeanos();
             }
 
-            function okeanos(krabr){
+            function okeanos(krabr, rootArtist){
                 var i;
                 var j, k;
                 var bor, oda;
@@ -86,7 +86,7 @@
                     if ($ArtistsOnGraph.indexOf(names[i]) === -1) {
                         $ArtistsOnGraph.push(names[i]);
                         $graph.addNode(names[i], pics[i]);
-                        $graph.addLink(names[i], )
+                        $graph.addLink(names[i], rootArtist)
                     }
 
                 }
