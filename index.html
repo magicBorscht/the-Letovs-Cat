@@ -104,6 +104,9 @@
 
 	function okeanos(krabr){
         var i;
+        var j;
+        var bor, oda;
+        var simart = [];
         var graph = Viva.Graph.graph();
         var names = [];
         var pics = [];
@@ -116,7 +119,25 @@
         {
             graph.addNode(names[i], pics[i]);
         }
-
+        for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
+        {
+            let artist = krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue;
+            $.get($URLStart, {
+                "method": $APIMETHOD_GetSimilarArtist,
+                "artist": artist,
+                "api_key": $secure_apiKey
+            }).done(function (data) {
+                simart.push(data);
+                });
+        }
+        for (i=0; i<names.length; i++)
+        {
+            bor = names[i];
+            for (j=0; j<names.length; j++)
+            {
+                
+            }
+        }
        // graph.addLink('anvaka', 'indexzero');
 
         var graphics = Viva.Graph.View.svgGraphics();
