@@ -99,12 +99,8 @@
                 }
 
                 for (i=0; i<$SimilarArtistsToAccept; i++) {
-                    if ($ArtistsOnGraph.indexOf(names[i]) === -1) {
-                        $ArtistsOnGraph.push(names[i]);
-                        $graph.addNode(names[i], pics[i]);
-                        $graph.addLink(names[i], rootArtist)
-                    }
-
+                    addArtistNodeToGraph(names[i], pics[i]);
+                    $graph.addLink(names[i], rootArtist)
                 }
                 for (i=0; i<$SimilarArtistsToAccept; i++)
                 {
