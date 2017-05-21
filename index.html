@@ -42,32 +42,22 @@
                     });
                 };
 
-            $SimilarArtistsToAccept = 20;
+            var $SimilarArtistsToAccept = 20;
 
             var $renderer = Viva.Graph.View.renderer($graph, {
                 graphics : $graphics
             });
 
-            function onArtistSubmit(){
-                let artist = document.getElementById('artistBox').value;
-                let tags = document.getElementById('tagsBox').value;
-                alert("to be implemented!" + artist + tags);
+            function onLoad(){
+                document.getElementById("numberToGetBox").value = $SimilarArtistsToAccept.toString();
+            }
 
-                let requestURL = $URLStart + $APIMETHOD_GetSimilarArtist
-
-
-
-                let req = new XMLHttpRequest();
-                req.open("GET", RequestURL, false);
-                req.send();
-                requestsResultsSum = requestsResultsSum + req.responseText;
-
+            function tests(){
 //testing our secrets:
                 alert("appname: "+$secure_appName +"\n" +
                     "apiKey: "+$secure_apiKey +"\n" +
                     "sharedSecret: "+$secure_sharedSecret +"\n" +
                     "registeredTo: "+$secure_registeredTo +"\n");
-
             }
 
 
@@ -80,7 +70,8 @@
                 }
             }
 
-            function tezdit() {
+            function onArtistSubmit() {
+                $SimilarArtistsToAccept = parseInt(document.getElementById("numberToGetBox").value);
                 var i;
                 let artist = document.getElementById('artistBox').value;
                 $.get($URLStart, {
@@ -182,19 +173,28 @@
         </style>
     </head>
 
-    <body style="background-color: ghostwhite;">
+    <body style="background-color: ghostwhite;" onload="onLoad()">
 		
 		<div id="formContainer">
 		<form name="toporol" method="get" action="">
+            <label> Artist name: </label>
             <input id="artistBox"
                    type="text" size="25" maxlength="30" value="Лолита"/>
+            <label> Tag: </label>
             <input id="tagsBox"
-                   type="text" size="25" maxlength="30" value=" ЪТОТАРЫ"/> <br/>
+                   type="text" size="25" maxlength="30" value=" ЪТОТАРЫ"/>
+            <label> Number of artists to get: </label>
+            <input id="numberToGetBox"
+                   type="text" size="25" maxlength="30" value=""/>
+            <br/>
+
 			<input id="artistSubmitButton"
-                   type="button" name="enter" value="Жмяк" onclick="onArtistSubmit()"/>
+                   type="button" name="enter" value="Search by name" onclick="onArtistSubmit()"/>
+            <input id="tagSubmitButton"
+                   type="button" name="enter" value="Search by tag" onclick="onTagSubmit()"/>
 		</form>
 		</div>
-	    <button onclick="tezdit()"> jmak me bleat </button>
+	    <button onclick="tests()"> don't jmak me bleat </button>
 
         <div id='graphContainer'></div>
     </body>
