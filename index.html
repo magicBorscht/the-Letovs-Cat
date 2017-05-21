@@ -96,16 +96,14 @@
                     "artist": artist,
                     "api_key": $secure_apiKey
                 }).done(function (data) {
+                    okeanos(data);
                     //alert(data.getElementsByTagName("image")[0].childNodes[0].nodeValue);
-                    //var kettler = data;
-                   okeanos(data);
                 });
                 //okeanos();
             }
 
-	function okeanos(){
-        var i=0;
-        var krabr = arguments[0];
+	function okeanos(krabr){
+        var i;
         var graph = Viva.Graph.graph();
         var names[krabr.getElementsByTagName("artist").length];
         var pics[krabr.getElementsByTagName("artist").length];
