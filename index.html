@@ -87,27 +87,36 @@
 
             }
 
-            function tezdit(){
+            function tezdit() {
                 var i;
                 let artist = document.getElementById('artistBox').value;
-
-
-                $.get( $URLStart, {
+                $.get($URLStart, {
                     "method": $APIMETHOD_GetSimilarArtist,
                     "artist": artist,
                     "api_key": $secure_apiKey
-                }).done(function( data ) {
-                    alert( data.getElementsByTagName("name")[0].childNodes[0].nodeValue );
+                }).done(function (data) {
+                    alert(data.getElementsByTagName("name")[0].childNodes[0].nodeValue);
+                    okeanos(data);
                 });
-                for (i=0; i<data.getElementsByTagName("artist").length; i++)
-                    {
-                        graph.addNode(data.getElementsByTagName("name")[0].childNodes[0].nodeValue, data.getElementsByTagName("image")[0].childNodes[0].nodeValue)
-                    }
-		//okeanos(data);
-
+                //okeanos(data);
             }
 
-	/*function okeanos(){
+	function okeanos(){
+       var i;
+        var graphGenerator = Viva.Graph.generator();
+        //  var graph = graphGenerator.grid(10, 10);
+        var graph = Viva.Graph.graph();
+        var layout = Viva.Graph.Layout.forceDirected(graph, {
+            springLength: 10,
+            springCoeff: 0.0008,
+            dragCoeff: 0.02,
+            gravity: -1.2
+            });
+        for (i=0; i<data.getElementsByTagName("artist").length; i++)
+        {
+            graph.addNode(data.getElementsByTagName("name")[0].childNodes[0].nodeValue, data.getElementsByTagName("image")[0].childNodes[0].nodeValue);
+        }
+
         var n;
         n = arguments.getElementsByTagName("artist").length;
 		var i=0;
@@ -117,7 +126,7 @@
 			 fhtagn += data.getElementsByTagName("name")[i].childNodes[i].nodeValue;
 			 }
         alert(fhtagn);
-		}*/
+		}
         </script>
 
         <style type='text/css'>
