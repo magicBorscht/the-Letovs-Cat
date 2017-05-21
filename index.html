@@ -23,8 +23,10 @@
 
             $URLStart = "http://ws.audioscrobbler.com/2.0/?method=";
             $APIMETHOD_GetSimilarArtist = "artist.getsimilar";
+            $APIMETHOD_GetArtistInfo = "artist.getinfo";
             $APIMETHOD_GetArtistsByTag = "Tag.getTopArtists";
             $ArtistsOnGraph = [];
+
 
             var $graph = Viva.Graph.graph();
             //var $graphics = Viva.Graph.View.svgGraphics();
@@ -77,16 +79,25 @@
             function onArtistSubmit() {
                 $SimilarArtistsToAccept = parseInt(document.getElementById("numberToGetBox").value);
                 var i;
-                let artist = document.getElementById('artistBox').value;
+                let rootartist = document.getElementById('artistBox').value;
                 $.get($URLStart, {
                     "method": $APIMETHOD_GetSimilarArtist,
-                    "artist": artist,
+                    "artist": rootartist,
+                    "api_key": $secure_apiKey
+                }).done(function (similarsXML) {
+                    preokeanos(similarsXML, rootartist);
+                });
+            }
+
+            function preokeanos(similarsXML, artistName){
+                $.get($URLStart, {
+                    "method": $APIMETHOD_GetArtistInfo,
+                    "artist": artistName,
                     "api_key": $secure_apiKey
                 }).done(function (data) {
-                    okeanos(data, artist);
-                    //alert(data.getElementsByTagName("image")[0].childNodes[0].nodeValue);
+                    let rootartistpic = data.getElementsByTagName("image")[2].childNodes[0].nodeValue;
+                    okeanos(similarsXML, artistName, rootartistpic);
                 });
-                //okeanos();
             }
 
             function onTagSubmit()
@@ -106,7 +117,7 @@
             }
 
 
-            function okeanos(krabr, rootArtist){
+            function okeanos(krabr, rootArtist, rootArtistPic){
                 var i;
                 var j, k;
                 var bor, oda;
@@ -119,6 +130,7 @@
                     pics.push(krabr.getElementsByTagName("image")[(i*6)+2].childNodes[0].nodeValue);
                 }
 
+                addArtistNodeToGraph(rootArtist, rootArtistPic);
                 for (i=0; i<$SimilarArtistsToAccept; i++) {
                     addArtistNodeToGraph(names[i], pics[i]);
                     $graph.addLink(names[i], rootArtist)
