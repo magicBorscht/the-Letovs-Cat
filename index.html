@@ -23,6 +23,7 @@
 
             $URLStart = "http://ws.audioscrobbler.com/2.0/?method=";
             $APIMETHOD_GetSimilarArtist = "artist.getsimilar";
+            $APIMETHOD_GetArtistsByTag = "Tag.getTopArtists";
             $ArtistsOnGraph = [];
 
             var $graph = Viva.Graph.graph();
@@ -87,6 +88,23 @@
                 });
                 //okeanos();
             }
+
+            function onTagSubmit()
+            {
+                $SimilarArtistsToAccept = parseInt(document.getElementById("numberToGetBox").value);
+                var i;
+                let tag = document.getElementById('tagsBox').value;
+                $.get($URLStart, {
+                    "method": $APIMETHOD_GetArtistsByTag,
+                    "tag": tag,
+                    "api_key": $secure_apiKey
+                }).done(function (data) {
+                    okeanos(data, tag);
+                    //alert(data.getElementsByTagName("image")[0].childNodes[0].nodeValue);
+                });
+                //okeanos();
+            }
+
 
             function okeanos(krabr, rootArtist){
                 var i;
