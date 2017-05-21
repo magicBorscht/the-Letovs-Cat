@@ -28,7 +28,7 @@
             var $graph = Viva.Graph.graph();
             var $graphics = Viva.Graph.View.svgGraphics();
 
-
+            $SimilarArtistsToAccept = 20;
 
             var $renderer = Viva.Graph.View.renderer($graph, {
                 graphics : $graphics
@@ -93,7 +93,7 @@
                     pics.push(krabr.getElementsByTagName("image")[(i*6)+2].childNodes[0].nodeValue);
                 }
 
-                for (i=0; i<krabr.getElementsByTagName("artist").length - 90; i++) {
+                for (i=0; i<$SimilarArtistsToAccept; i++) {
                     if ($ArtistsOnGraph.indexOf(names[i]) === -1) {
                         $ArtistsOnGraph.push(names[i]);
                         $graph.addNode(names[i], pics[i]);
@@ -101,7 +101,7 @@
                     }
 
                 }
-                for (i=0; i<krabr.getElementsByTagName("artist").length - 90; i++)
+                for (i=0; i<$SimilarArtistsToAccept; i++)
                 {
                     let curartist = krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue;
                     $.get($URLStart, {
@@ -111,7 +111,7 @@
                     }).done(function (data) {
                         for (j=0; j<$ArtistsOnGraph.length; j++)
                         {
-                            for (k=0; k<data.getElementsByTagName("artist").length - 90; k++)
+                            for (k=0; k<$SimilarArtistsToAccept; k++)
                             {
                                 if ($ArtistsOnGraph[j] === data.getElementsByTagName("name")[k].childNodes[0].nodeValue) $graph.addLink($ArtistsOnGraph[j], curartist);
                             }
