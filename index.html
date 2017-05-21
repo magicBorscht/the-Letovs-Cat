@@ -49,6 +49,7 @@
 
             }
 
+
             function addArtistNodeToGraph(artistName, artistPic)
             {
                 if (!$ArtistsOnGraph.contains(artistName))
@@ -96,17 +97,17 @@
                 }
                 for (i=0; i<krabr.getElementsByTagName("artist").length; i++)
                 {
-                    let artist = krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue;
+                    let curartist = krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue;
                     $.get($URLStart, {
                         "method": $APIMETHOD_GetSimilarArtist,
-                        "artist": artist,
+                        "artist": curartist,
                         "api_key": $secure_apiKey
                     }).done(function (data) {
-                        for (j=0; j<names.length; j++)
+                        for (j=0; j<$ArtistsOnGraph.length; j++)
                         {
                             for (k=0; k<data.getElementsByTagName("artist").length; k++)
                             {
-                                if (names[j] === data.getElementsByTagName("name")[k].childNodes[0].nodeValue) $graph.addLink(names[j], krabr.getElementsByTagName("name")[i].childNodes[0].nodeValue);
+                                if ($ArtistsOnGraph[j] === data.getElementsByTagName("name")[k].childNodes[0].nodeValue) $graph.addLink($ArtistsOnGraph[j], curartist);
                             }
                         }
                         simart.push(data);
