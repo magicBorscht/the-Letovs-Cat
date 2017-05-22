@@ -27,6 +27,7 @@
             $APIMETHOD_GetArtistsByTag = "Tag.getTopArtists";
             $ArtistsOnGraph = [];
 
+            var $SimilarArtistsToAccept = 20;
 
             var $graph = Viva.Graph.graph();
             //var $graphics = Viva.Graph.View.svgGraphics();
@@ -41,13 +42,11 @@
                     });
                 };
             var $layout = Viva.Graph.Layout.forceDirected($graph, {
-                springLength: 350,
+                springLength: 250,
                 springCoeff: 0.00008,
                 dragCoeff: 0.02,
-                gravity: -0.4
+                gravity: -0.02
             });
-
-            var $SimilarArtistsToAccept = 20;
 
             var $renderer = Viva.Graph.View.renderer($graph, {
                 graphics : $graphics,
