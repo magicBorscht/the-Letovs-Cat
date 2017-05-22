@@ -76,6 +76,13 @@
                     $ArtistsOnGraph.push(artistName);
                 }
             }
+            function ensureLinkBetweenArtistsOnGraph(artistRaz, artistDva)
+            {
+                if ( ! ($graph.hasLink(artistRaz, artistDva)) )
+                {
+                    $graph.addLink(artistRaz, artistDva);
+                }
+            }
 
             function onArtistSubmit() {
                 $SimilarArtistsToAccept = parseInt(document.getElementById("numberToGetBox").value);
@@ -156,7 +163,7 @@
                     {
                         for (k=0; k<$SimilarArtistsToAccept && k<names.length; k++)
                         {
-                            if ($ArtistsOnGraph[j] === data.getElementsByTagName("name")[k].childNodes[0].nodeValue) $graph.addLink($ArtistsOnGraph[j], curartist);
+                            if ($ArtistsOnGraph[j] === data.getElementsByTagName("name")[k].childNodes[0].nodeValue) ensureLinkBetweenArtistsOnGraph($ArtistsOnGraph[j], curartist);
                         }
                     }
                     simart.push(data);
@@ -212,7 +219,7 @@
                 addArtistNodeToGraph(rootArtist, rootArtistPic);
                 for (i=0; i<$SimilarArtistsToAccept && i<names.length; i++) {
                     addArtistNodeToGraph(names[i], pics[i]);
-                    $graph.addLink(names[i], rootArtist)
+                    ensureLinkBetweenArtistsOnGraph(names[i], rootArtist)
                 }
                 for (i=0; i<$SimilarArtistsToAccept && i<names.length; i++)
                 {
@@ -226,7 +233,7 @@
                         {
                             for (k=0; k<$SimilarArtistsToAccept && k<names.length; k++)
                             {
-                                if ($ArtistsOnGraph[j] === data.getElementsByTagName("name")[k].childNodes[0].nodeValue) $graph.addLink($ArtistsOnGraph[j], curartist);
+                                if ($ArtistsOnGraph[j] === data.getElementsByTagName("name")[k].childNodes[0].nodeValue) ensureLinkBetweenArtistsOnGraph($ArtistsOnGraph[j], curartist);
                             }
                         }
                         simart.push(data);
